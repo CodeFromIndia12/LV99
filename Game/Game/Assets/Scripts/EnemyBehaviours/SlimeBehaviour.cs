@@ -50,8 +50,6 @@ public class SlimeBehaviour : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(isPlayerInRadius);
-
         if (isPlayerInRadius)
         {
             AttackPlayer();
