@@ -242,7 +242,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _topSpeed: 5
   _accSpeed: 10
-  _deccSpeed: 15
+  _deccSpeed: 5
 --- !u!58 &1454526096395330597
 CircleCollider2D:
   m_ObjectHideFlags: 0

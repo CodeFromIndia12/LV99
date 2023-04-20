@@ -12,6 +12,9 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody2D _rb2D;
 
+    [SerializeField] private GroundCheck groundCheck;
+    private SpriteRenderer _spriteRenderer;
+
     [Header("Movement Parameters")]
     [SerializeField] private float _topSpeed;
     [SerializeField] private float _accSpeed;
@@ -31,6 +34,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float maxGravity;
 
     private float _gravity;
+    private bool isGrounded;
+
+    private float _moveInput;
 
     private void Start()
     {
@@ -40,16 +46,29 @@ public class PlayerController : MonoBehaviour
         playerInput.actions["Jump"].performed += Jump;
 
         _rb2D = _player.GetComponent<Rigidbody2D>();
+        _spriteRenderer = _player.GetComponent<SpriteRenderer>();
         _gravity = _rb2D.gravityScale;
     }
 
     private void FixedUpdate()
     {
-        Moving(move.ReadValue<float>());
+        _moveInput = move.ReadValue<float>();
+        Moving();
         BetterJump();
     }
 
-    private void Moving(float _moveInput)
+    private void Update()
+    {
+        isGrounded = groundCheck.IsGrounded();
+
+        if ((_moveInput > 0 && !_spriteRenderer.flipX) || (_moveInput < 0 && _spriteRenderer.flipX))
+        {
+            Flip();
+            Debug.Log("flipped");
+        }
+    }
+
+    private void Moving()
     {
         _targetSpeed = _moveInput * _topSpeed;
         _speedDiff = _targetSpeed - _rb2D.velocity.x;
@@ -61,7 +80,10 @@ public class PlayerController : MonoBehaviour
 
     private void Jump(InputAction.CallbackContext context)
     {
-        _rb2D.velocity = new Vector2(_rb2D.velocity.x, _jumpVel);
+        if (isGrounded)
+        {
+            _rb2D.velocity = new Vector2(_rb2D.velocity.x, _jumpVel);
+        }
     }
 
     private void BetterJump()
@@ -76,6 +98,10 @@ public class PlayerController : MonoBehaviour
         }
 
         _rb2D.gravityScale = Mathf.Clamp(_rb2D.gravityScale, 0, maxGravity);
+    }
+    private void Flip()
+    {
+        _spriteRenderer.flipX = !_spriteRenderer.flipX;
     }
 
     private void OnDisable()

@@ -19,7 +19,7 @@ public class AttackPlayer : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             isPlayerInRadius = true;
-            StartCoroutine(Attack(collision.GetComponent<PlayerHealth>()));
+            StartCoroutine(Attack(collision.GetComponent<HealthManager>()));
         }
     }
 
@@ -31,11 +31,11 @@ public class AttackPlayer : MonoBehaviour
         }
     }
 
-    IEnumerator Attack(PlayerHealth playerHealth)
+    IEnumerator Attack(HealthManager healthManager)
     {
         while (isPlayerInRadius)
         {
-            playerHealth.IsAttacked(damageDealtByEnemy);
+            healthManager.IsAttacked(damageDealtByEnemy);
 
             yield return new WaitForSeconds(attackIntervalTime);
         }

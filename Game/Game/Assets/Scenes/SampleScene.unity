@@ -217,7 +217,7 @@ GameObject:
   - component: {fileID: 772746546}
   - component: {fileID: 772746545}
   - component: {fileID: 772746544}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -379,6 +379,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8069312736994000577, guid: bccb0e15b70f20b428db54cf37061fd8, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8069312736994000577, guid: bccb0e15b70f20b428db54cf37061fd8, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8069312736994000577, guid: bccb0e15b70f20b428db54cf37061fd8, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8069312736994000578, guid: bccb0e15b70f20b428db54cf37061fd8, type: 3}
       propertyPath: m_RootOrder
       value: 2
