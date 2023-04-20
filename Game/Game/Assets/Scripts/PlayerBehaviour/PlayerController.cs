@@ -64,7 +64,6 @@ public class PlayerController : MonoBehaviour
         if ((_moveInput > 0 && !_spriteRenderer.flipX) || (_moveInput < 0 && _spriteRenderer.flipX))
         {
             Flip();
-            Debug.Log("flipped");
         }
     }
 
