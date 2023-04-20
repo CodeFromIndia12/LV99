@@ -463,7 +463,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageDealtByEnemy: 1
-  attackIntervalTime: 0.5
+  attackIntervalTime: 1
   enemy: {fileID: 178889147}
 --- !u!1 &772746543
 GameObject:
