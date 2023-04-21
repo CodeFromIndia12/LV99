@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageDealtByEnemy: 1
-  attackIntervalTime: 1
+  attackIntervalTime: 1.5
   enemy: {fileID: 1454526096395330594}
 --- !u!58 &1454526095713722429
 CircleCollider2D:
@@ -62,7 +62,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 1.5
 --- !u!1 &1454526096001388622
 GameObject:
   m_ObjectHideFlags: 0
