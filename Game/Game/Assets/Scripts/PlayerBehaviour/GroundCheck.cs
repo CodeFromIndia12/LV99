@@ -13,4 +13,10 @@ public class GroundCheck : MonoBehaviour
 
         return isGrounded;
     }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(transform.position, groundCheckRadius);
+    }
 }

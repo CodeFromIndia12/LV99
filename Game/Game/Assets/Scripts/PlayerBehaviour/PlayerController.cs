@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Player")]
     [SerializeField] private GameObject _player;
+    [SerializeField] private Transform _playerVisualTransform;
 
     private Rigidbody2D _rb2D;
 
@@ -37,6 +38,7 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded;
 
     private float _moveInput;
+    private float _lastMoveInput;
 
     private void Start()
     {
@@ -53,6 +55,17 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         _moveInput = move.ReadValue<float>();
+        if (_moveInput != 0)
+        {
+            if (_moveInput > 0)
+            {
+                _lastMoveInput = 1;
+            }
+            else
+            {
+                _lastMoveInput = -1;
+            }
+        }
         Moving();
         BetterJump();
     }
@@ -61,14 +74,18 @@ public class PlayerController : MonoBehaviour
     {
         isGrounded = groundCheck.IsGrounded();
 
-        if ((_moveInput > 0 && !_spriteRenderer.flipX) || (_moveInput < 0 && _spriteRenderer.flipX))
+        if (_moveInput != 0)
         {
-            Flip();
+            if (_playerVisualTransform.rotation.eulerAngles.y == 0 && _moveInput > 0 || _playerVisualTransform.rotation.eulerAngles.y == 180 && _moveInput < 0)
+                Flip();
         }
     }
 
     private void Moving()
     {
+        if (!isGrounded && _moveInput == 0)
+            return;
+
         _targetSpeed = _moveInput * _topSpeed;
         _speedDiff = _targetSpeed - _rb2D.velocity.x;
         _accRate = (Mathf.Abs(_targetSpeed) > 0.01f) ? _accSpeed : _deccSpeed;
@@ -100,7 +117,17 @@ public class PlayerController : MonoBehaviour
     }
     private void Flip()
     {
-        _spriteRenderer.flipX = !_spriteRenderer.flipX;
+        if (_playerVisualTransform.rotation.y == 0)
+            _playerVisualTransform.rotation = Quaternion.Euler(0, 180, 0);
+        else
+            _playerVisualTransform.rotation = Quaternion.Euler(0, 0, 0);
+    }
+
+    public bool IsLookingRight()
+    {
+        if (_lastMoveInput > 0)
+            return true;
+        else return false;
     }
 
     private void OnDisable()
