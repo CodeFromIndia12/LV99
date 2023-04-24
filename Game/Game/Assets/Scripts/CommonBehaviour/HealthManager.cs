@@ -16,6 +16,7 @@ public class HealthManager : MonoBehaviour
     [SerializeField] private bool isPlayer;
 
     [SerializeField] private Transform objectTransform;
+    [SerializeField] private LobbyManager lobbyManager;
 
     private float healthPercentage;
     private float currentHealth;
@@ -44,7 +45,7 @@ public class HealthManager : MonoBehaviour
         {
             if (isPlayer)
             {
-                Debug.Log("Player Is Dead!!");
+                lobbyManager.GameOver();
             }
             else
             {
